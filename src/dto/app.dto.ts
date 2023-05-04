@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class PosData {
   @IsNotEmpty()
@@ -43,6 +43,8 @@ export class PosData {
 }
 
 export class TestInput {
-  readonly name: string;
-  readonly age: number;
+  @IsString()
+  name: string;
+  @IsNumber()
+  age: number;
 }
