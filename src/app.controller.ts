@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { PosData } from './dto/app.dto';
+import { PosData, TestInput } from './dto/app.dto';
 
 @Controller()
 export class AppController {
@@ -21,9 +21,4 @@ export class AppController {
     console.log('HIT');
     return this.appService.savePosInfo(input);
   }
-}
-
-export class TestInput {
-  readonly name: string;
-  readonly age: number;
 }

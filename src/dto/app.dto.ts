@@ -41,3 +41,8 @@ export class PosData {
   @IsString()
   deviceManufacturer: string;
 }
+
+export class TestInput {
+  readonly name: string;
+  readonly age: number;
+}
