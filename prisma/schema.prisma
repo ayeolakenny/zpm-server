@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pos {
+  id                  Int      @id @default(autoincrement())
+  batteryPercentage   String
+  ipAddress           String
+  connectedToInternet Boolean
+  canReachInternet    Boolean
+  typeOfConnection    String
+  carrierName         String
+  country             String
+  deviceName          String
+  brandName           String
+  manufacturer        String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@map("pos")
+}
