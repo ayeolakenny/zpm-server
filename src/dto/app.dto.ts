@@ -1,45 +1,42 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class PosData {
-  @IsNotEmpty()
-  @IsString()
-  percentage: string;
-
-  @IsNotEmpty()
-  @IsString()
-  ipAddress: string;
-
-  @IsNotEmpty()
-  @IsBoolean()
-  connectedToInternet: boolean;
-
-  @IsNotEmpty()
-  @IsBoolean()
-  canReachInternet: boolean;
-
-  @IsNotEmpty()
-  @IsString()
-  typeOfConnection: string;
-
-  @IsNotEmpty()
-  @IsString()
-  carrierName: string;
-
-  @IsNotEmpty()
-  @IsString()
-  country: string;
-
-  @IsNotEmpty()
-  @IsString()
-  deviceBrand: string;
-
+export class CreateDeviceDto {
   @IsNotEmpty()
   @IsString()
   deviceName: string;
 
   @IsNotEmpty()
   @IsString()
+  ipAddress: string;
+
+  @IsNotEmpty()
+  @IsString()
   deviceManufacturer: string;
+
+  @IsNotEmpty()
+  @IsString()
+  deviceModel: string;
+}
+export class MetricData {
+  @IsNotEmpty()
+  @IsNumber()
+  deviceId: number;
+
+  @IsNotEmpty()
+  @IsString()
+  location: string;
+
+  @IsNotEmpty()
+  @IsString()
+  batteryPercentage: string;
+
+  @IsNotEmpty()
+  @IsString()
+  networkStatus: string;
+
+  @IsNotEmpty()
+  @IsString()
+  carrierNetwork: string;
 }
 
 export class TestInput {

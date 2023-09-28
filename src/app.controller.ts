@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { AppService } from './app.service';
-import { PosData, TestInput } from './dto/app.dto';
+import { CreateDeviceDto, MetricData } from './dto/app.dto';
+import { Response } from 'express';
 
 @Controller()
 export class AppController {
@@ -11,14 +12,15 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post('test')
-  async test(@Body() input: TestInput) {
-    return input;
+  @Post('create')
+  async createDevice(@Body() input: CreateDeviceDto, @Res() res: Response) {
+    await this.appService.createDevice(input);
+    return res.status(201).json({ message: 'Device created' });
   }
 
-  @Post()
-  savePosInfo(@Body() input: PosData) {
-    console.log('HIT');
-    return this.appService.savePosInfo(input);
+  @Post('record')
+  saveDeviceMetrics(@Body() input: MetricData, @Res() res: Response) {
+    this.appService.saveDeviceMetrics(input);
+    return res.status(201).json({ message: 'Metric for device recorded' });
   }
 }

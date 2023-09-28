@@ -7,20 +7,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Pos {
-  id                  Int      @id @default(autoincrement())
-  batteryPercentage   String
-  ipAddress           String
-  connectedToInternet Boolean
-  canReachInternet    Boolean
-  typeOfConnection    String
-  carrierName         String
-  country             String
-  deviceName          String
-  brandName           String
-  manufacturer        String
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+model Metrics {
+  id                Int      @id @default(autoincrement())
+  batteryPercentage String
+  carrierNetwork    String
+  location          String
+  networkStatus     String
+  createdAt         DateTime @default(now())
+  Device            Device?  @relation(fields: [deviceId], references: [id])
+  deviceId          Int?
+}
 
-  @@map("pos")
+model Device {
+  id                 Int       @id @default(autoincrement())
+  deviceName         String
+  ipAddress          String
+  deviceManufacturer String
+  deviceModel        String
+  metrics            Metrics[]
+  createdAt          DateTime  @default(now())
 }

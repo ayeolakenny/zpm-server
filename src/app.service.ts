@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PosData } from './dto/app.dto';
+import { CreateDeviceDto, MetricData } from './dto/app.dto';
 import { PrismaService } from './prisma.service';
 
 @Injectable()
@@ -10,32 +10,30 @@ export class AppService {
     return 'Hello World!';
   }
 
-  async savePosInfo(input: PosData) {
+  async createDevice(input: CreateDeviceDto) {
+    await this.prisma.device.create({
+      data: input,
+    });
+
+    return true;
+  }
+
+  async saveDeviceMetrics(input: MetricData) {
     const {
-      canReachInternet,
-      carrierName,
-      connectedToInternet,
-      country,
-      deviceBrand,
-      deviceManufacturer,
-      deviceName,
-      ipAddress,
-      percentage,
-      typeOfConnection,
+      deviceId,
+      batteryPercentage,
+      carrierNetwork,
+      location,
+      networkStatus,
     } = input;
 
-    await this.prisma.pos.create({
+    await this.prisma.metrics.create({
       data: {
-        batteryPercentage: percentage,
-        brandName: deviceBrand,
-        canReachInternet,
-        carrierName,
-        connectedToInternet,
-        country,
-        deviceName,
-        ipAddress,
-        manufacturer: deviceManufacturer,
-        typeOfConnection,
+        batteryPercentage,
+        carrierNetwork,
+        location,
+        networkStatus,
+        Device: { connect: { id: deviceId } },
       },
     });
 
