@@ -20,22 +20,58 @@ export class AppService {
 
   async saveDeviceMetrics(input: MetricData) {
     const {
-      deviceId,
       batteryPercentage,
       carrierNetwork,
       location,
       networkStatus,
+      // Device data
+      deviceManufacturer,
+      deviceModel,
+      deviceName,
+      ipAddress,
     } = input;
 
-    await this.prisma.metrics.create({
-      data: {
-        batteryPercentage,
-        carrierNetwork,
-        location,
-        networkStatus,
-        Device: { connect: { id: deviceId } },
+    const device = await this.prisma.device.findFirst({
+      where: {
+        AND: [
+          { deviceManufacturer },
+          { deviceModel },
+          { deviceName },
+          { ipAddress },
+        ],
       },
     });
+
+    if (device) {
+      await this.prisma.metrics.create({
+        data: {
+          batteryPercentage,
+          carrierNetwork,
+          location,
+          networkStatus,
+          Device: { connect: { id: device.id } },
+        },
+      });
+    } else {
+      const newDevice = await this.prisma.device.create({
+        data: {
+          deviceManufacturer,
+          deviceModel,
+          deviceName,
+          ipAddress,
+        },
+      });
+
+      await this.prisma.metrics.create({
+        data: {
+          batteryPercentage,
+          carrierNetwork,
+          location,
+          networkStatus,
+          Device: { connect: { id: newDevice.id } },
+        },
+      });
+    }
 
     return true;
   }

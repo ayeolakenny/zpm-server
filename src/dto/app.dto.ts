@@ -19,10 +19,6 @@ export class CreateDeviceDto {
 }
 export class MetricData {
   @IsNotEmpty()
-  @IsNumber()
-  deviceId: number;
-
-  @IsNotEmpty()
   @IsString()
   location: string;
 
@@ -37,6 +33,23 @@ export class MetricData {
   @IsNotEmpty()
   @IsString()
   carrierNetwork: string;
+
+  // Device Data
+  @IsNotEmpty()
+  @IsString()
+  deviceName: string;
+
+  @IsNotEmpty()
+  @IsString()
+  ipAddress: string;
+
+  @IsNotEmpty()
+  @IsString()
+  deviceManufacturer: string;
+
+  @IsNotEmpty()
+  @IsString()
+  deviceModel: string;
 }
 
 export class TestInput {
