@@ -8,8 +8,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getDeviceMetrics() {
+    return this.appService.getDeviceMetrics();
   }
 
   @Post('create')

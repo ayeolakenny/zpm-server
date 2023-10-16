@@ -10,6 +10,12 @@ export class AppService {
     return 'Hello World!';
   }
 
+  async getDeviceMetrics() {
+    return await this.prisma.device.findMany({
+      include: { metrics: true },
+    });
+  }
+
   async createDevice(input: CreateDeviceDto) {
     await this.prisma.device.create({
       data: input,
