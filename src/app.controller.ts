@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateDeviceDto, MetricData } from './dto/app.dto';
 import { Response } from 'express';
@@ -8,8 +8,13 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getDeviceMetrics() {
-    return this.appService.getDeviceMetrics();
+  getDevices() {
+    return this.appService.getDevices();
+  }
+
+  @Get(':deviceId')
+  getDevice(@Param('deviceId') id: string) {
+    return this.appService.getDevice(id);
   }
 
   @Post('create')
