@@ -9,10 +9,10 @@ datasource db {
 
 model Metrics {
   id                Int      @id @default(autoincrement())
-  batteryPercentage String
-  carrierNetwork    String
-  location          String
-  networkStatus     String
+  batteryPercentage String?
+  carrierNetwork    String?
+  location          String?
+  networkStatus     String?
   createdAt         DateTime @default(now())
   Device            Device?  @relation(fields: [deviceId], references: [id])
   deviceId          Int?

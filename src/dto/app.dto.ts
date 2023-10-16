@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateDeviceDto {
   @IsNotEmpty()
@@ -18,20 +18,16 @@ export class CreateDeviceDto {
   deviceModel: string;
 }
 export class MetricData {
-  @IsNotEmpty()
-  @IsString()
+  @IsOptional()
   location: string;
 
-  @IsNotEmpty()
-  @IsString()
+  @IsOptional()
   batteryPercentage: string;
 
-  @IsNotEmpty()
-  @IsString()
+  @IsOptional()
   networkStatus: string;
 
-  @IsNotEmpty()
-  @IsString()
+  @IsOptional()
   carrierNetwork: string;
 
   // Device Data
