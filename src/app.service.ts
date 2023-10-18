@@ -12,7 +12,11 @@ export class AppService {
 
   async getDevices() {
     return await this.prisma.device.findMany({
-      include: { metrics: true },
+      include: {
+        metrics: {
+          orderBy: { createdAt: 'desc' },
+        },
+      },
     });
   }
 
