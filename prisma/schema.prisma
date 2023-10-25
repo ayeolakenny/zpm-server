@@ -19,11 +19,17 @@ model Metrics {
 }
 
 model Device {
-  id                 Int       @id @default(autoincrement())
-  deviceName         String
-  ipAddress          String
-  deviceManufacturer String
-  deviceModel        String
-  metrics            Metrics[]
-  createdAt          DateTime  @default(now())
+  id           Int          @id @default(autoincrement())
+  name         String
+  ipAddress    String
+  manufacturer String
+  mdelo        String
+  status       DeviceStatus
+  metrics      Metrics[]
+  createdAt    DateTime     @default(now())
+}
+
+enum DeviceStatus {
+  CRITICAL
+  OK
 }

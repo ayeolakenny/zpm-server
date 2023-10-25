@@ -1,0 +1,8 @@
+Device {
+		status: OK | CRITICAL // reset this status on every metric added
+}
+
+/devices - get total devices
+/devices - filter devices to know the number of OK | CRITICAL
+/devices - filter by network status also
+
