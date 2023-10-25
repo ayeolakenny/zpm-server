@@ -23,7 +23,7 @@ model Device {
   name         String
   ipAddress    String
   manufacturer String
-  mdelo        String
+  model        String
   status       DeviceStatus
   metrics      Metrics[]
   createdAt    DateTime     @default(now())

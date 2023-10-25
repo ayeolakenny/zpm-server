@@ -1,10 +1,13 @@
+-- CreateEnum
+CREATE TYPE "DeviceStatus" AS ENUM ('CRITICAL', 'OK');
+
 -- CreateTable
 CREATE TABLE "Metrics" (
     "id" SERIAL NOT NULL,
-    "batteryPercentage" TEXT NOT NULL,
-    "carrierNetwork" TEXT NOT NULL,
-    "location" TEXT NOT NULL,
-    "networkStatus" TEXT NOT NULL,
+    "batteryPercentage" TEXT,
+    "carrierNetwork" TEXT,
+    "location" TEXT,
+    "networkStatus" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "deviceId" INTEGER,
 
@@ -14,10 +17,11 @@ CREATE TABLE "Metrics" (
 -- CreateTable
 CREATE TABLE "Device" (
     "id" SERIAL NOT NULL,
-    "deviceName" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "ipAddress" TEXT NOT NULL,
-    "deviceManufacturer" TEXT NOT NULL,
-    "deviceModel" TEXT NOT NULL,
+    "manufacturer" TEXT NOT NULL,
+    "model" TEXT NOT NULL,
+    "status" "DeviceStatus" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Device_pkey" PRIMARY KEY ("id")
